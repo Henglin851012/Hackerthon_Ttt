@@ -1,0 +1,14 @@
+#Django ignore
+*.sqlite3
+__pycache__
+*.log
+*.pot
+*.pyc
+create_dummydata.py
+.envexample
+#static_root folder
+staticroot/
+#media root folder
+uploads/
+#secret key file for dev
+dev_secret.txt
