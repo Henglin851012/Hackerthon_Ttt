@@ -4,18 +4,18 @@
 
 {% block breadcrumb_navigation %}
 	<a href="{% url 'home_url' %}" class="w3-bar-item w3-button " >Home</a>
-	<span class="w3-bar-item">/</span>
-	<a href="{% url 'myprofile_update_url' %}" class="w3-bar-item w3-button w3-green w3-round-large" >My Account</a>	
-	<span class="w3-bar-item">/</span>
+	<span class="w3-bar-item">></span>
+	<a href="{% url 'myprofile_update_url' %}" class="w3-bar-item w3-button w3-round-large" >My Account</a>	
+	<span class="w3-bar-item">></span>
 {% endblock %}
 
 {% block content %}
 	<div class="w3-card-4 w3-light-grey w3-align-center-50">
-		<div class="w3-container w3-dark-grey"><h4>Update account details</h4></div>
+		<div class="w3-container w3-text-white" style="background-color:rgb(51,63,80);"><h4>Update account details</h4></div>
 		<form method="post" class="w3-form-element " novalidate>
 			{% csrf_token %}
 			{% include 'form_template.html' %}
-			<button type="submit" class="w3-button w3-green w3-round w3-wide" >Save changes</button>
+			<button type="submit" class="w3-button w3-round w3-wide w3-text-white" style="background-color:rgb(84,103,143);" >Save changes</button>
 		</form>
 	</div>
 {% endblock %}
