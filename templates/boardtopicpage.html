@@ -15,7 +15,7 @@
 	
 {% block content %}
 	
-	<a href="{% url 'new_topic_url' board.id %}" style="background-color:rgb(84,103,143);" class="w3-button w3-text-white w3-round-small" >+New</a>
+	
 	<table class="w3-section w3-table-all w3-centered w3-card-4">
 		<tr style="background-color:rgb(51,63,80);" class="w3-text-white">
 			<th>Topics</th>
@@ -34,9 +34,10 @@
 			<td>{{ topic.created_on|naturaltime }}</td>
 			<td>{{ topic.lastupdated_on|naturaltime }}</td>
 		</tr>
+
 		{% endfor %}
 	</table>
-
+<a href="{% url 'new_topic_url' board.id %}" style="background-color:rgb(84,103,143);" class="w3-right w3-button w3-text-white w3-round-small" >+New</a>
 {% endblock %}
 
 
