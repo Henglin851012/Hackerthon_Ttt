@@ -16,8 +16,12 @@
 		</div><!-- comment added for inline-block : https://css-tricks.com/fighting-the-space-between-inline-block-elements/
 	---><div class="w3-inline-block " style="width:90%;">
 			<div class="w3-panel w3-light-grey">
-				<div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><b class="w3-text-green">{{ post.created_by }}</b></div><!-- comment for inline-block
-			---><div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><i class="w3-text-green">Created: {{ post.created_on|naturaltime }}</i></div><!-- comment for inline-block
+                {% if not post.anonymous %}
+				<div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><b class="w3-text-green">{{ post.created_by }}</b></div>
+                {% else %}
+                <div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><b class="w3-text-green">Anonymous</b></div>
+                {% endif %}
+                <div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><i class="w3-text-green">Created: {{ post.created_on|naturaltime }}</i></div><!-- comment for inline-block
 			---><div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><i class="w3-text-green w3-right">Updated: {{ post.updated_on|naturaltime }}</i></div>
 			</div>
 			<div class="w3-padding">

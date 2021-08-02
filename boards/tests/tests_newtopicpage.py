@@ -35,7 +35,7 @@ class NewTopicPage_Test(TestCase):
 		cls.resolveresult = resolve(cls.pathcorrect)
 		cls.homeurl = reverse('home_url')
 		cls.boardtopicpageurl = reverse('board_topics_url', kwargs={'board_id': cls.board.id})
-		cls.formfieldseq = ['subject','message']
+		cls.formfieldseq = ['subject','message','anonymous']
 
 	def setUp(self):
 		#login user 
@@ -114,7 +114,7 @@ class NewTopicPage_Test(TestCase):
 
 	def test_14(self):
 		response = self.client.get(self.newtopicurl_correct)
-		self.assertContains(response, '<input type=', 2)	#csrf and subject
+		self.assertContains(response, '<input type=', 3)	#csrf and subject
 		self.assertContains(response, 'type="text"', 1)	#subject
 		self.assertContains(response, '<textarea', 1)	#message
 

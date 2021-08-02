@@ -30,7 +30,11 @@
 			<td> <a href="{% url 'topic_page_url' board_id=board.id topic_id=topic.id %}" class="w3-text-blue">{{ topic.subject }} </a> </td>	
 			<td>{{ topic.replies_count }}</td>
 			<td>{{ topic.views }}</td>
+            {% if not topic.anonymous %}
 			<td>{{ topic.created_by }}</td>
+            {% else %}
+            <td>Anonymous</td>
+            {% endif %}
 			<td>{{ topic.created_on|naturaltime }}</td>
 			<td>{{ topic.lastupdated_on|naturaltime }}</td>
 		</tr>

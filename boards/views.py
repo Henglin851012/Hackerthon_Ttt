@@ -77,7 +77,7 @@ def new_topic(request, board_id):
 			topic.created_by = user
 			topic.save()
 			#Now create the Post object in DB 
-			Post.objects.create(message=form.cleaned_data.get('message'), topic=topic, created_by=user)
+			Post.objects.create(message=form.cleaned_data.get('message'), topic=topic, anonymous=form.cleaned_data.get('anonymous'), created_by=user)
 			return redirect('topic_page_url', board_id=board.id, topic_id=topic.id)	
 	elif request.method=='GET':
 		form = NewTopic_Form()	#blank form
