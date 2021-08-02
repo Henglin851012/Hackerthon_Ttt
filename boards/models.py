@@ -20,7 +20,7 @@ class Topic(models.Model):
 	subject = models.CharField(max_length=255, unique=True)
 	board = models.ForeignKey(Board, on_delete=models.SET_NULL, related_name='topics', null=True)
 	created_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='topics', null=True)
-	anonymous = models.BooleanField()
+	anonymous = models.BooleanField(default=False)
 	created_on = models.DateTimeField(auto_now_add=True)	
 	views = models.PositiveIntegerField(default=0)
 
@@ -56,7 +56,7 @@ class Topic(models.Model):
 class Post(models.Model):
 	message = models.CharField(max_length=5000)
 	created_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='posts', null=True)
-	anonymous = models.BooleanField()
+	anonymous = models.BooleanField(default=False)
 	created_on = models.DateTimeField(auto_now_add=True)
 	topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, related_name='posts', null=True)
 	updated_on = models.DateTimeField(default=timezone.now)	#if you use timezone.now in save the use () because then callable is not passed but value is

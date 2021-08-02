@@ -34,7 +34,7 @@ class TopicReplyPage_Test(TestCase):
 		cls.homeurl = reverse('home_url')
 		cls.boardtopicsurl = reverse('board_topics_url', kwargs={'board_id':cls.board.id})
 		cls.topicurl = reverse('topic_page_url', kwargs={'board_id':cls.board.id, 'topic_id':cls.topic.id})
-		cls.formfields_seq = ['message']
+		cls.formfields_seq = ['message', 'anonymous']
 		cls.replytopicdata_correct = {'message': 'Test message'}
 
 	#login needed
@@ -72,7 +72,7 @@ class TopicReplyPage_Test(TestCase):
 
 	def test_7(self):
 		response = self.client.get(self.replytopicurl_correct)
-		self.assertContains(response, '<input type=', 1)	#csrf
+		self.assertContains(response, '<input type=', 2)	#csrf
 		self.assertContains(response, '<textarea', 1)	#message
 
 	def test_8(self):
