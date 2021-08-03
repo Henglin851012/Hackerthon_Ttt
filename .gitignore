@@ -12,3 +12,4 @@ staticroot/
 uploads/
 #secret key file for dev
 dev_secret.txt
+/boards/migrations/

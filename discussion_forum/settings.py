@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     #external app
     'mdeditor',
+    'django_toggle_switch_widget',
 ]
 
 MIDDLEWARE = [
@@ -116,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hant'
 
 TIME_ZONE = 'Asia/Taipei'
 
@@ -168,9 +169,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'
 
 #paginate_by values
-BOARD_PAGINATE_BY = 4
-TOPIC_PAGINATE_BY = 4
-POST_PAGINATE_BY = 4
+BOARD_PAGINATE_BY = 10
+TOPIC_PAGINATE_BY = 10
+POST_PAGINATE_BY = 10
 
 #sendgrid api key
 SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='')
