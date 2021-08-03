@@ -139,6 +139,32 @@ def topic_reply_page(request,board_id,topic_id):
 		form = TopicReply_Form()
 	return render(request, 'topicreplypage.html',{'board':board, 'topic':topic, 'form':form})
 
+
+# topic close
+@login_required()  # login needed to close topic
+def close_topic(request, board_id, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+    topic.is_closed = True
+    topic.save()
+
+    board = get_object_or_404(Board, id=board_id)
+    bt_url = reverse('board_topics_url', kwargs={'board_id': board.id})
+    # 用redirect就會回去 board/1/ 頁面，而非 /closeTopic頁面
+    return redirect('{url}'.format(url=bt_url), board_id=board.id)
+
+
+# topic reopen
+@login_required()  # login needed to close topic
+def reopen_topic(request, board_id, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+    topic.is_closed = False
+    topic.save()
+    board = get_object_or_404(Board, id=board_id)
+    bt_url = reverse('board_topics_url', kwargs={'board_id': board.id})
+    # 用redirect就會回去 board/1/ 頁面，而非 /closeTopic頁面
+    return redirect('{url}'.format(url=bt_url), board_id=board.id)
+
+
 #post edit class based view using generic view UpdateView
 @method_decorator(login_required, name='dispatch')	#login needed to edit post
 class PostEdit_View(UpdateView):
