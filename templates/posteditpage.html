@@ -10,7 +10,7 @@
 	<span class="w3-bar-item">/</span>
 	<a href="{% url 'topic_page_url' board_id=board.id topic_id=topic.id %}" class="w3-bar-item w3-button w3-round-large" >{{ topic.subject }}</a>
 	<span class="w3-bar-item">/</span>
-	<a href="{% url 'post_edit_url' board_id=board.id topic_id=topic.id post_id=post.id %}" class="w3-bar-item w3-button w3-round-large w3-green" >Edit Post</a>
+	<a href="{% url 'post_edit_url' board_id=board.id topic_id=topic.id post_id=post.id %}" class="w3-bar-item w3-button w3-round-large" >Edit Post</a>
 	<span class="w3-bar-item">/</span>
 {% endblock breadcrumb_navigation %}
 
@@ -21,7 +21,7 @@
 			{% csrf_token %}
 			{{ form.media }}	<!generates css js declared for form/field >
 			{% include 'form_template.html' %}
-			<button type="submit" class="w3-button w3-green w3-round w3-wide" >Save changes</button>
+			<button type="submit" class="w3-button w3-round w3-wide" style="background-color:#54678f;color:white" >Save changes</button>
 			<a href="{% url 'topic_page_url' board_id=board.id topic_id=topic.id %}?page={% call_method topic 'get_pageno_of_post' post %}#{{ post.id }}" class="w3-button w3-round-large w3-dark-grey">Cancel</a>
 		</form>
 	</div>

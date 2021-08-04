@@ -1,36 +1,46 @@
 {% load static %}
 {% load humanize %}
 {% load custom_tags_filters %}
-<div id={{ post.id }} class="w3-card-2 w3-light-grey w3-margin">
-	<div class="w3-panel w3-leftbar w3-border-dark-grey">
+<div id={{ post.id }} class="w3-card" style="background-color: #222A35;">
+	<div class=" w3-border-dark-grey" >
 		{% if forloop.first %}
-			<div class="w3-panel w3-center w3-dark-grey">
+			<div class=" w3-left" style="color:#222A35; font-weight: 1000;width:100%; background-color: white; padding:3% 0% 3% 5%; font-size: 100%;font-size: 25px;" style="border: none;">
 				{{ topic.subject }}
 			</div>
 		{% endif %}
-		<div  class="w3-inline-block w3-vertical-align-top" style="width:10%;">
+		<!-- <div  class="w3-inline-block w3-vertical-align-top" style="width:10%;">
 			<div class="w3-padding w3-center">
 				<img src="{{ post.created_by|gravatar_url }}" alt="{{ post.created_by.username }}" class="w3-circle" >
 			</div>
 			<small class="w3-padding w3-text-green">Posts: {{ post.created_by.posts.count }}</small>
-		</div><!-- comment added for inline-block : https://css-tricks.com/fighting-the-space-between-inline-block-elements/
-	---><div class="w3-inline-block " style="width:90%;">
-			<div class="w3-panel w3-light-grey">
-                {% if not post.anonymous %}
-				<div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><b class="w3-text-green">{{ post.created_by }}</b></div>
-                {% else %}
-                <div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><b class="w3-text-green">Anonymous</b></div>
-                {% endif %}
-                <div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><i class="w3-text-green">Created: {{ post.created_on|naturaltime }}</i></div><!-- comment for inline-block
-			---><div class="w3-inline-block w3-vertical-align-top" style="width:33%;"><i class="w3-text-green w3-right">Updated: {{ post.updated_on|naturaltime }}</i></div>
+		</div> -->
+		<!-- comment added for inline-block : https://css-tricks.com/fighting-the-space-between-inline-block-elements/--->
+		<div class="w3-inline-block " style="width:100%;border: white 5px solid;">
+			<div  style="background-color: #222A35;">
+				{% if not post.anonymous %}
+				<div class="w3-inline-block w3-vertical-align-top" style="width:33%;padding-left:5% ;color:white; font-weight: bold;">{{ post.created_by }}</div><!-- comment for inline-block
+			--->{% else %}
+			<div class="w3-inline-block w3-vertical-align-top" style="width:33%;padding-left:5% ;color:white; font-weight: bold;">Anonymous</div>
+				<!-- comment for inline-block
+			--->{% endif %}
+				<div class="w3-inline-block w3-vertical-align-top w3-right  w3-margin-right" style="color: #585A60">Created: {{ post.created_on|naturaltime }}</i></div>
+				<div class="w3-inline-block w3-vertical-align-top w3-right  w3-margin-right" style="color: #585A60">Updated: {{ post.updated_on|naturaltime }}</i></div>
 			</div>
 			<div class="w3-padding">
-				{{ post.get_message_as_markdown }}
+				<div style="color:white;padding-left: 5%;">
+					{{ post.get_message_as_markdown }}
+				</div>
+				
 				{% if post.created_by == request.user %}
 					<div>
-						<a href="{% url 'post_edit_url' board_id=board.id topic_id=topic.id post_id=post.id %}" class="w3-button w3-green w3-round-large w3-small w3-margin-top">Edit</a>	
+						<a href="{% url 'post_edit_url' board_id=board.id topic_id=topic.id post_id=post.id %}" class="w3-button w3-round-large w3-small w3-margin-top w3-right w3-margin-bottom" style="background-color:#54678f;color:white">Edit</a>	
 					</div>
 				{% endif %}
+				
+				{% if forloop.first %}
+					<a href="{% url 'topic_reply_url' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large w3-small w3-margin-top w3-right w3-margin-right  w3-margin-bottom" style="background-color:#54678f;color:white; right:10%;">Reply</a>
+				{% endif %}
+				
 			</div>
 		</div>
 	</div>
