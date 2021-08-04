@@ -133,13 +133,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/' # url prefix where static files will be hosted
 
-#where django will search for static files other than app directories
-STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-    ]
 
-#where static files will be stored after collectstatic
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticroot')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    ('css', os.path.join(STATIC_ROOT, 'css').replace('\\', '/')),
+    ('images', os.path.join(STATIC_ROOT, 'images').replace('\\', '/')),
+    ('fonts', os.path.join(STATIC_ROOT, 'fonts').replace('\\', '/')),
+    ('js', os.path.join(STATIC_ROOT, 'js').replace('\\', '/')),
+)
+
 
 #adding default django authentication backend
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',]
@@ -175,3 +177,4 @@ POST_PAGINATE_BY = 10
 
 #sendgrid api key
 SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='')
+

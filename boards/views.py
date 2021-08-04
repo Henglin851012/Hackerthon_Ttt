@@ -16,6 +16,32 @@ from django.urls import reverse
 from django.conf import settings
 
 # Create your views here.
+class Index_View(ListView):
+	allow_empty = True
+	context_object_name = 'index'
+	template_name = 'index.html'
+	def get_queryset(self):
+		queryset = Board.objects.all()
+		queryset = queryset.annotate(lastupdated_on=Max('topics__posts__updated_on'))
+		queryset = queryset.annotate(posts_count=Count('topics__posts'))
+		queryset = queryset.order_by('-lastupdated_on')
+		return queryset
+
+def board_topics(request, board_id):
+	board = get_object_or_404(Board, id=board_id)
+	queryset = board.topics.all().annotate(lastupdated_on=Max('posts__updated_on'))
+	queryset = queryset.annotate(replies_count=Count('posts')-1)
+	queryset = queryset.order_by('-lastupdated_on')
+	page = request.GET.get(key='page', default=1)
+	paginator = Paginator(queryset, settings.TOPIC_PAGINATE_BY)
+	try:
+		topics = paginator.page(page)
+	except PageNotAnInteger:
+		topics = paginator.page(1)
+	except EmptyPage:
+		topics = paginator.page(paginator.num_pages)
+
+	return render(request, 'boardtopicpage.html', {'board': board, 'topics': topics, 'paginator':paginator, 'page_obj':topics, 'object_list':topics.object_list, 'is_paginated':topics.has_other_pages()})
 
 #home class based view using generic class views 
 class Home_View(ListView):
