@@ -159,10 +159,8 @@ def reopen_topic(request, board_id, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
     topic.is_closed = False
     topic.save()
-    board = get_object_or_404(Board, id=board_id)
-    bt_url = reverse('board_topics_url', kwargs={'board_id': board.id})
-    # 用redirect就會回去 board/1/ 頁面，而非 /closeTopic頁面
-    return redirect('{url}'.format(url=bt_url), board_id=board.id)
+    # redirect回原始頁面
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 
 #post edit class based view using generic view UpdateView
