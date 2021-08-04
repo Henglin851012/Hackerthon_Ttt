@@ -19,6 +19,7 @@
 	<table class="w3-section w3-table-all w3-centered w3-card-4">
 		<tr style="background-color:rgb(51,63,80);" class="w3-text-white">
 			<th>Topics</th>
+			<th>Status</th>
 			<th>Replies</th>
 			<th>Views</th>
 			<th>Poster</th>
@@ -28,6 +29,11 @@
 		{% for topic in topics %}
 		<tr>
 			<td> <a href="{% url 'topic_page_url' board_id=board.id topic_id=topic.id %}" class="w3-text-blue">{{ topic.subject }} </a> </td>	
+			{% if not topic.is_closed %}
+			<td>Open</td>
+            {% else %}
+            <td>Closed</td>
+            {% endif %}
 			<td>{{ topic.replies_count }}</td>
 			<td>{{ topic.views }}</td>
             {% if not topic.anonymous %}
