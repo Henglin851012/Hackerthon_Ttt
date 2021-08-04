@@ -6,12 +6,12 @@
 		
 	</head>
 	<body style="background-color:rgb(34,42,53)">
-		<div class="w3-padding " >
-			<h1 class="w3-left w3-text-white w3-wide w3-inline-block">TSMC Talk Talk</h1>
+		<div class="w3-padding w3-bar w3-black" >
+			<h1 class="w3-left w3-text-red w3-wide w3-inline-block" style="font-weight: bold; font-family:OCR A Std, monospace;">TSMC Talk Talk</h1>
 			
 		</div>
 			
-			<div class="w3-section w3-bar w3-white" style="weight:100%">
+			<div class="w3-section w3-bar w3-white" style="weight:100%; position:absolute;top:10%">
 				{% block breadcrumb_navigation %} {% endblock breadcrumb_navigation %}
 				{% block account %}
 				{% if user.is_authenticated %}
@@ -29,7 +29,9 @@
 				{% endif %}
 			{% endblock account %}
 			</div>
-			<div class="w3-margin w3-container ">
+			<div class="w3-section w3-bar" style="color:rgb(34,42,53)">
+			</div>
+			<div class="w3-margin w3-container " >
 			{% block content %}	{% endblock content %}
 			{% block pagination %} {% include 'pagination.html' %}	{% endblock pagination %}
 			</div>
