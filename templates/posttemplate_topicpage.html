@@ -23,14 +23,14 @@
 			<div class="w3-inline-block w3-vertical-align-top" style="width:33%;padding-left:5% ;color:white; font-weight: bold;">Anonymous</div>
 				<!-- comment for inline-block
 			--->{% endif %}
-				<div class="w3-inline-block w3-vertical-align-top w3-right  w3-margin-right" style="color: #585A60">Created: {{ post.created_on|naturaltime }}</i></div>
-				<div class="w3-inline-block w3-vertical-align-top w3-right  w3-margin-right" style="color: #585A60">Updated: {{ post.updated_on|naturaltime }}</i></div>
+				<div class="w3-inline-block w3-vertical-align-top w3-right  w3-margin-right" style="color: #585A60">Created: <i>{{ post.created_on|naturaltime }}</i></div>
+				<div class="w3-inline-block w3-vertical-align-top w3-right  w3-margin-right" style="color: #585A60">Updated: <i>{{ post.updated_on|naturaltime }}</i></div>
 			</div>
 			<div class="w3-padding">
 				<div style="color:white;padding-left: 5%;">
 					{{ post.get_message_as_markdown }}
 				</div>
-				
+
 				{% if post.created_by == request.user %}
 					<div>
 					{% if not topic.is_closed %}
@@ -38,10 +38,11 @@
 					{% endif %}
 					</div>
 				{% endif %}
-				
 				{% if forloop.first %}
+                    {% if not topic.is_closed %}
 					<a href="{% url 'topic_reply_url' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large w3-small w3-margin-top w3-right w3-margin-right  w3-margin-bottom" style="background-color:#54678f;color:white; right:10%;">Reply</a>
-				{% endif %}
+				    {% endif %}
+                {% endif %}
 				
 			</div>
 		</div>

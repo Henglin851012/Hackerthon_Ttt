@@ -13,16 +13,16 @@
 
 {% block content %}
 	{% if not topic.is_closed %}
-	<a href="{% url 'topic_reply_url' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large" >Reply</a>
+	<a href="{% url 'topic_reply_url' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large w3-dark-grey">Reply</a>
 	{% else %}
 	<span class="w3-bar-item"><b style="color:red;">Read only</b></span>
 	{% endif %}
 	{% if request.user == topic.created_by %}
 		{% if not topic.is_closed %}
 		<!--  board_id就是對應函數的參數，要根據函數不同去換	-->
-		<a href="{% url 'closetopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large" >Close Topic</a>
+		<a href="{% url 'closetopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large w3-dark-grey">Close Topic</a>
 		{% else %}
-		<a href="{% url 'opentopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large" >Open Topic</a>
+		<a href="{% url 'opentopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-round-large w3-dark-grey">Open Topic</a>
 		{% endif %}
 	{% endif %}
 	{% for post in posts %}
