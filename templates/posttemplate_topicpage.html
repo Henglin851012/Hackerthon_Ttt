@@ -27,13 +27,11 @@
 			<div class="w3-padding">
 				{{ post.get_message_as_markdown }}
 				{% if post.created_by == request.user %}
-					{% if not topic.is_closed %}
 					<div>
+					{% if not topic.is_closed %}
 						<a href="{% url 'post_edit_url' board_id=board.id topic_id=topic.id post_id=post.id %}" class="w3-button w3-green w3-round-large w3-small w3-margin-top">Edit</a>
-					</div>
-					{% else %}
-					<p style="color:red;">Read only</p>
 					{% endif %}
+					</div>
 				{% endif %}
 			</div>
 		</div>

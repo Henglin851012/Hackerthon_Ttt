@@ -12,16 +12,19 @@
 {% endblock breadcrumb_navigation %}
 
 {% block content %}
-
 	{% if not topic.is_closed %}
 	<a href="{% url 'topic_reply_url' board_id=board.id topic_id=topic.id %}" class="w3-button w3-green w3-round-large w3-wide" >Reply</a>
-	<!--  board_id就是對應函數的參數，要根據函數不同去換	-->
-	<a href="{% url 'closetopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-green w3-round-large w3-wide" >Close the topic</a>
 	{% else %}
-	<p style="color:white;">Read only</p>
-	<a href="{% url 'opentopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-green w3-round-large w3-wide" >Open the topic</a>
+	<span class="w3-bar-item"><b style="color:red;">Read only</b></span>
 	{% endif %}
-
+	{% if request.user == topic.created_by %}
+		{% if not topic.is_closed %}
+		<!--  board_id就是對應函數的參數，要根據函數不同去換	-->
+		<a href="{% url 'closetopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-green w3-round-large w3-wide" >Close Topic</a>
+		{% else %}
+		<a href="{% url 'opentopic' board_id=board.id topic_id=topic.id %}" class="w3-button w3-green w3-round-large w3-wide" >Open Topic</a>
+		{% endif %}
+	{% endif %}
 	{% for post in posts %}
 		{% include 'posttemplate_topicpage.html' %}
 	{% endfor %}
