@@ -11,7 +11,7 @@
 			
 		</div>
 			
-			<div class="w3-section w3-bar w3-white" style="weight:100%; position:absolute;top:10%">
+			<div class=" w3-bar w3-white" style="weight:100%;">
 				{% block breadcrumb_navigation %} {% endblock breadcrumb_navigation %}
 				{% block account %}
 				{% if user.is_authenticated %}
@@ -29,8 +29,7 @@
 				{% endif %}
 			{% endblock account %}
 			</div>
-			<div class="w3-section w3-bar" style="color:rgb(34,42,53)">
-			</div>
+			
 			<div class="w3-margin w3-container " >
 			{% block content %}	{% endblock content %}
 			{% block pagination %} {% include 'pagination.html' %}	{% endblock pagination %}
