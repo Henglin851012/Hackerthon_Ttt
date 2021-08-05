@@ -155,17 +155,13 @@ def close_topic(request, board_id, topic_id):
 
 # topic reopen
 @login_required()  # login needed to close topic
+@login_required()  # login needed to close topic
 def reopen_topic(request, board_id, topic_id):
-	board = get_object_or_404(Board, id=board_id)
-	topic = get_object_or_404(Topic, id=topic_id)
-	if topic.created_by != request.user:
-		raise Http404()
-	else:
-		topic.is_closed = False
-		topic.save()
-		bt_url = reverse('board_topics_url', kwargs={'board_id': board.id})
-		# 用redirect就會回去 board/1/ 頁面，而非 /closeTopic頁面
-		return redirect('{url}'.format(url=bt_url), board_id=board.id)
+    topic = get_object_or_404(Topic, id=topic_id)
+    topic.is_closed = False
+    topic.save()
+    # redirect回原始頁面
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 #post edit class based view using generic view UpdateView
 @method_decorator(login_required, name='dispatch')	#login needed to edit post
