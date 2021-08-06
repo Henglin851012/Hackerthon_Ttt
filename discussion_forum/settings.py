@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from decouple import config, Csv
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = "TSMCTALKTALK"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = 'TRUE'
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
@@ -44,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     #custom internal app
-    'boards',   
+    'boards',
     'user_account',
 
     #external app
@@ -91,7 +90,7 @@ WSGI_APPLICATION = 'discussion_forum.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
+    'default': dj_database_url.config(default="sqlite:///db.sqlite3")
 }
 
 
@@ -125,7 +124,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True  
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -153,14 +152,14 @@ LOGIN_REDIRECT_URL = 'home_url'
 #login url name for login required stuff
 LOGIN_URL = 'login_url'
 
-#email settings 
-EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_HOST = config('EMAIL_HOST', default='localhost')  #default as in docs
-EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)    #same
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='') #same
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='') #same
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)   #same
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost' ) #django default
+#email settings
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "localhost"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = "webmaster@localhost"
 
 #media root where all uploaded files will be stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
@@ -172,6 +171,3 @@ MEDIA_URL = '/media/'
 BOARD_PAGINATE_BY = 10
 TOPIC_PAGINATE_BY = 10
 POST_PAGINATE_BY = 10
-
-#sendgrid api key
-SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='')

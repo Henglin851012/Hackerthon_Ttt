@@ -86,7 +86,7 @@ class PasswordReset_Test(TestCase):
 		reset_email = mail.outbox[0]
 		#check subject of reset_email
 		#THIS BELOW IS FOR CONSOLE EMAIL BACKEND
-		self.assertEqual('[Discussion Forum] Please reset your password', reset_email.subject)
+		self.assertEqual('[TSMC Talk Talk] Please reset your password', reset_email.subject)
 		#check reset_email sender
 		self.assertEqual(DEFAULT_FROM_EMAIL,reset_email.from_email)
 		#check reset email recipient 
