@@ -20,6 +20,7 @@ class EditPostPage_Test(TestCase):
 	@classmethod
 	def setUpTestData(cls):
 		cls.user = User.objects.create_user(username='test1', email='test1@test.com', password='test123')
+		cls.user2 = User.objects.create_user(username='test2', email='test2@test.com', password='test456')
 		cls.board = Board.objects.create(name='Test', description='Test')
 		cls.topic = Topic.objects.create(subject='Test', board=cls.board, created_by=cls.user)
 		cls.post = Post.objects.create(message='Test1', topic=cls.topic, created_by=cls.user)
@@ -62,7 +63,7 @@ class EditPostPage_Test(TestCase):
 
 	def test_6(self):
 		response = self.client.post(self.editposturl_correct, data={'message': 'Edit message'}, follow=True)
-		topicurl_pageid = '{url}?page={pageno}#{postid}'.format(url=self.topicpageurl, pageno=self.topic.get_pageno_of_post(self.post1), postid=self.post1.id)
+		topicurl_pageid = '{url}?page={pageno}#{postid}'.format(url=self.topicpageurl, pageno=self.topic.get_pageno_of_post(self.post), postid=self.post.id)
 		self.assertRedirects(response=response, expected_url=topicurl_pageid, status_code=302, target_status_code=200)
 
 	def test_7(self):
