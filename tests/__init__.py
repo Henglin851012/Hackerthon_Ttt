@@ -1,1 +1,0 @@
-#tests here will be for app-independent components like project-shared templatetags etc
