@@ -1,0 +1,11 @@
+*.sqlite3
+__pycache__
+*.log
+*.pot
+*.pyc
+.envexample
+staticroot/
+uploads/
+dev_secret.txt
+.env
+/venv
