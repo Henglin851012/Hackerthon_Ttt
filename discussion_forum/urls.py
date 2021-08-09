@@ -24,10 +24,10 @@ import boards.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', boards.views.Home_View.as_view(), name='home_url'),
-    path('board/', include('boards.urls')),     #urls of boards app
-    path('user/', include('user_account.urls')),    #urls of user_account app  
-
+    path('home/', boards.views.Home_View.as_view(), name='home_url'),
+    path('board/', include('boards.urls')),  # urls of boards app
+    path('user/', include('user_account.urls')),  # urls of user_account app
+    path('', boards.views.Index_View.as_view(), name='index_url'),
 
     #mdeditor
     path('mdeditor/', include('mdeditor.urls'))

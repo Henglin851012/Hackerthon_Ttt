@@ -16,6 +16,17 @@ from django.http import Http404
 
 # Create your views here.
 
+class Index_View(ListView):
+	allow_empty = True
+	context_object_name = 'index'
+	template_name = 'index.html'
+	def get_queryset(self):
+		queryset = Board.objects.all()
+		queryset = queryset.annotate(lastupdated_on=Max('topics__posts__updated_on'))
+		queryset = queryset.annotate(posts_count=Count('topics__posts'))
+		queryset = queryset.order_by('-lastupdated_on')
+		return queryset
+
 #home class based view using generic class views
 class Home_View(ListView):
 	allow_empty = True #if no boards
